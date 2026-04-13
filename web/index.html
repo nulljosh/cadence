@@ -4,411 +4,394 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cadence</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@200;400;500&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #111;
+      --text: #e8e8e8;
+      --text-secondary: rgba(232,232,232,0.5);
+      --text-tertiary: rgba(232,232,232,0.25);
+      --border: rgba(232,232,232,0.1);
+      --accent: #e8e8e8;
+      --font: 'Geist', -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+      --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    html { scroll-behavior: smooth; }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
-      background: #0a0a0f;
-      color: #f0f0f5;
-      min-height: 100vh;
-      display: flex;
+      font-family: var(--font);
+      font-weight: 400;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100dvh;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* Sidebar */
-    .sidebar {
-      width: 220px;
-      min-height: 100vh;
-      background: rgba(255,255,255,0.04);
-      border-right: 1px solid rgba(255,255,255,0.08);
-      padding: 24px 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      flex-shrink: 0;
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: clamp(3rem, 8vw, 6rem) clamp(1.25rem, 5vw, 3rem) 4rem;
     }
 
-    .sidebar-logo {
-      font-size: 20px;
-      font-weight: 700;
-      letter-spacing: -0.5px;
-      color: #fff;
-      padding: 0 8px 20px;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      margin-bottom: 8px;
+    /* FadeUp */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* Header */
+    header { margin-bottom: clamp(3rem, 6vw, 5rem); }
+
+    .wordmark {
+      font-size: clamp(3rem, 8vw, 5.5rem);
+      font-weight: 200;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      line-height: 1.05;
+      margin-bottom: 0.75rem;
     }
 
-    .sidebar-logo span {
-      color: #0071e3;
-    }
-
-    .sidebar-label {
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.3);
-      padding: 8px 8px 4px;
-    }
-
-    .proj-item {
+    .sub {
+      font-size: 0.9375rem;
+      color: var(--text-secondary);
       display: flex;
       align-items: center;
-      gap: 10px;
-      padding: 8px 10px;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background 0.15s;
-      font-size: 13px;
-      color: rgba(255,255,255,0.7);
-    }
-
-    .proj-item:hover { background: rgba(255,255,255,0.07); }
-    .proj-item.active { background: rgba(0,113,227,0.15); color: #4da6ff; }
-
-    .proj-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #0071e3;
-      flex-shrink: 0;
-    }
-
-    .proj-dot.green { background: #30d158; }
-    .proj-dot.amber { background: #ffd60a; }
-    .proj-dot.pink  { background: #ff375f; }
-    .proj-dot.teal  { background: #5ac8fa; }
-
-    /* Main */
-    .main {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      overflow-y: auto;
-    }
-
-    .topbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 20px 32px;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-      background: rgba(255,255,255,0.02);
-    }
-
-    .topbar-title {
-      font-size: 17px;
-      font-weight: 600;
-      letter-spacing: -0.3px;
-    }
-
-    .topbar-sub {
-      font-size: 12px;
-      color: rgba(255,255,255,0.4);
-      margin-top: 2px;
+      gap: 1rem;
     }
 
     .streak-badge {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(255,214,10,0.12);
-      border: 1px solid rgba(255,214,10,0.2);
-      border-radius: 20px;
-      padding: 6px 14px;
-      font-size: 13px;
-      font-weight: 600;
-      color: #ffd60a;
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-tertiary);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 3px 10px;
     }
 
-    /* Cards row */
-    .cards {
+    /* Section label */
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-tertiary);
+      display: block;
+      margin-bottom: 1.25rem;
+    }
+
+    section { margin-bottom: clamp(2.5rem, 5vw, 4rem); }
+
+    /* Stats row */
+    .stats-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-      padding: 24px 32px;
+      border-top: 1px solid var(--border);
     }
 
-    .card {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 14px;
-      padding: 20px;
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.15s;
+    .stat-cell {
+      padding: 1.25rem 0;
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding-right: 1.5rem;
+      transition: opacity 0.3s ease-out;
     }
 
-    .card:hover {
-      transform: translateY(-2px);
-      border-color: rgba(255,255,255,0.15);
-    }
+    .stat-cell:last-child { border-right: none; }
+    .stat-cell:hover { opacity: 0.6; }
 
-    .card-label {
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.35);
-      margin-bottom: 10px;
-    }
-
-    .card-value {
-      font-size: 32px;
-      font-weight: 700;
-      letter-spacing: -1px;
-      color: #fff;
+    .stat-num {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 200;
+      letter-spacing: -0.03em;
+      color: var(--text);
       line-height: 1;
+      margin-bottom: 0.4rem;
     }
 
-    .card-sub {
-      font-size: 12px;
-      color: rgba(255,255,255,0.35);
-      margin-top: 6px;
-    }
-
-    .card-value.blue  { color: #4da6ff; }
-    .card-value.green { color: #30d158; }
-    .card-value.amber { color: #ffd60a; }
-
-    /* Chart section */
-    .section {
-      padding: 0 32px 24px;
-    }
-
-    .section-title {
-      font-size: 13px;
-      font-weight: 600;
-      color: rgba(255,255,255,0.5);
-      letter-spacing: 0.05em;
+    .stat-label {
+      font-size: 0.6875rem;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      margin-bottom: 14px;
-    }
-
-    .chart-box {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.07);
-      border-radius: 14px;
-      padding: 20px;
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-    }
-
-    canvas { max-height: 180px; }
-
-    /* Project table */
-    .proj-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 13px;
-    }
-
-    .proj-table th {
-      text-align: left;
-      padding: 8px 12px;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.3);
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
-
-    .proj-table td {
-      padding: 12px 12px;
-      border-bottom: 1px solid rgba(255,255,255,0.04);
-      color: rgba(255,255,255,0.75);
-    }
-
-    .proj-table tr:last-child td { border-bottom: none; }
-    .proj-table tr:hover td { background: rgba(255,255,255,0.03); }
-
-    .proj-name { font-weight: 500; color: #fff; }
-
-    .pill {
-      display: inline-block;
-      padding: 2px 10px;
-      border-radius: 20px;
-      font-size: 11px;
+      color: var(--text-tertiary);
       font-weight: 500;
     }
 
-    .pill-blue  { background: rgba(0,113,227,0.2);  color: #4da6ff; }
-    .pill-green { background: rgba(48,209,88,0.15); color: #30d158; }
-    .pill-amber { background: rgba(255,214,10,0.15);color: #ffd60a; }
+    /* Chart */
+    .chart-wrap {
+      border-top: 1px solid var(--border);
+      padding-top: 1.5rem;
+    }
 
-    /* Activity heatmap */
+    canvas { max-height: 160px; }
+
+    /* Heatmap */
+    .heatmap-wrap {
+      border-top: 1px solid var(--border);
+      padding-top: 1.5rem;
+    }
+
     .heatmap {
       display: flex;
-      gap: 3px;
       flex-wrap: wrap;
+      gap: 3px;
     }
 
     .heatmap-cell {
-      width: 12px;
-      height: 12px;
+      width: 11px;
+      height: 11px;
       border-radius: 2px;
-      background: rgba(255,255,255,0.05);
-      transition: transform 0.15s;
+      background: rgba(232,232,232,0.07);
+      transition: transform 0.15s var(--spring), opacity 0.15s;
     }
 
-    .heatmap-cell:hover { transform: scale(1.4); }
-    .heatmap-cell.l1 { background: rgba(0,113,227,0.2); }
-    .heatmap-cell.l2 { background: rgba(0,113,227,0.45); }
-    .heatmap-cell.l3 { background: rgba(0,113,227,0.7); }
-    .heatmap-cell.l4 { background: #0071e3; }
+    .heatmap-cell:hover { transform: scale(1.5); opacity: 0.8; }
+    .heatmap-cell.l1 { background: rgba(232,232,232,0.15); }
+    .heatmap-cell.l2 { background: rgba(232,232,232,0.35); }
+    .heatmap-cell.l3 { background: rgba(232,232,232,0.6); }
+    .heatmap-cell.l4 { background: rgba(232,232,232,0.9); }
 
-    @media (max-width: 768px) {
-      .sidebar { display: none; }
-      .cards { grid-template-columns: repeat(2, 1fr); padding: 16px; }
-      .section { padding: 0 16px 16px; }
-      .topbar { padding: 16px; }
+    /* Project list */
+    .proj-list {
+      list-style: none;
+      border-top: 1px solid var(--border);
+    }
+
+    .proj-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.875rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.9375rem;
+      color: var(--text-secondary);
+      transition: opacity 0.3s ease-out, transform 0.2s var(--spring);
+    }
+
+    .proj-row:hover { opacity: 0.6; transform: translateX(4px); }
+
+    .proj-name {
+      color: var(--text);
+      font-weight: 500;
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .proj-meta {
+      display: flex;
+      align-items: baseline;
+      gap: 1.5rem;
+      flex-shrink: 0;
+      font-size: 0.875rem;
+    }
+
+    .proj-commits {
+      color: var(--text);
+      font-weight: 500;
+      min-width: 3ch;
+      text-align: right;
+    }
+
+    .proj-ago { color: var(--text-tertiary); white-space: nowrap; }
+
+    .status-dot {
+      display: inline-block;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--text-tertiary);
+      vertical-align: middle;
+      margin-right: 4px;
+    }
+
+    .status-dot.active { background: var(--text-secondary); }
+
+    @media (max-width: 600px) {
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .stat-cell:nth-child(2) { border-right: none; }
+      .proj-meta { gap: 0.75rem; }
+      .proj-ago { display: none; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Sidebar -->
-  <nav class="sidebar animate__animated animate__fadeInLeft">
-    <div class="sidebar-logo">Caden<span>ce</span></div>
-    <div class="sidebar-label">Projects</div>
-    <div class="proj-item active"><div class="proj-dot"></div> All Projects</div>
-    <div id="sidebar-projects"></div>
-  </nav>
+  <div class="container">
 
-  <!-- Main -->
-  <div class="main">
-    <div class="topbar animate__animated animate__fadeInDown">
-      <div>
-        <div class="topbar-title">Overview</div>
-        <div class="topbar-sub">April 12, 2026 &mdash; all repositories</div>
+    <header class="fade-up">
+      <div class="wordmark">Cadence</div>
+      <div class="sub">
+        <span id="date-line">code activity</span>
+        <span class="streak-badge" id="streak-badge">-- day streak</span>
       </div>
-      <div class="streak-badge" id="streak-badge">-- day streak</div>
-    </div>
+    </header>
 
-    <!-- Stat cards -->
-    <div class="cards">
-      <div class="card animate__animated animate__fadeInUp" style="animation-delay:0.05s">
-        <div class="card-label">Commits (30d)</div>
-        <div class="card-value blue" id="stat-total">--</div>
-        <div class="card-sub">across all repos</div>
+    <section class="fade-up" style="transition-delay:0.05s">
+      <span class="section-label">Stats</span>
+      <div class="stats-grid">
+        <div class="stat-cell">
+          <div class="stat-num" id="stat-total">--</div>
+          <div class="stat-label">Commits 30d</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-num" id="stat-projects">--</div>
+          <div class="stat-label">Repos</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-num" id="stat-best">--</div>
+          <div class="stat-label">Best Day</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-num" id="stat-streak">--</div>
+          <div class="stat-label">Streak</div>
+        </div>
       </div>
-      <div class="card animate__animated animate__fadeInUp" style="animation-delay:0.1s">
-        <div class="card-label">Active Projects</div>
-        <div class="card-value" id="stat-projects">--</div>
-        <div class="card-sub">tracked repos</div>
-      </div>
-      <div class="card animate__animated animate__fadeInUp" style="animation-delay:0.15s">
-        <div class="card-label">Best Day (30d)</div>
-        <div class="card-value green" id="stat-best">--</div>
-        <div class="card-sub">commits in one day</div>
-      </div>
-      <div class="card animate__animated animate__fadeInUp" style="animation-delay:0.2s">
-        <div class="card-label">Current Streak</div>
-        <div class="card-value amber" id="stat-streak">--</div>
-        <div class="card-sub">days</div>
-      </div>
-    </div>
+    </section>
 
-    <!-- Commit graph -->
-    <div class="section animate__animated animate__fadeInUp" style="animation-delay:0.25s">
-      <div class="section-title">Commit Activity</div>
-      <div class="chart-box">
+    <section class="fade-up" style="transition-delay:0.1s">
+      <span class="section-label">Commit Activity</span>
+      <div class="chart-wrap">
         <canvas id="commitChart"></canvas>
       </div>
-    </div>
+    </section>
 
-    <!-- Heatmap -->
-    <div class="section animate__animated animate__fadeInUp" style="animation-delay:0.3s">
-      <div class="section-title">Activity Grid</div>
-      <div class="chart-box">
+    <section class="fade-up" style="transition-delay:0.15s">
+      <span class="section-label">Activity Grid</span>
+      <div class="heatmap-wrap">
         <div class="heatmap" id="heatmap"></div>
       </div>
-    </div>
+    </section>
 
-    <!-- Project table -->
-    <div class="section animate__animated animate__fadeInUp" style="animation-delay:0.35s">
-      <div class="section-title">All Projects</div>
-      <div class="chart-box">
-        <table class="proj-table">
-          <thead>
-            <tr>
-              <th>Project</th>
-              <th>Platform</th>
-              <th>Last Commit</th>
-              <th>Commits (30d)</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody id="proj-tbody"><tr><td colspan="5" style="color:rgba(255,255,255,0.3);padding:20px">Loading...</td></tr></tbody>
-        </table>
-      </div>
-    </div>
+    <section class="fade-up" style="transition-delay:0.2s">
+      <span class="section-label">Projects</span>
+      <ul class="proj-list" id="proj-list"></ul>
+    </section>
+
   </div>
 
   <script>
     const API = 'http://localhost:3001';
-    const DOT_CLASSES = ['', 'green', 'amber', 'pink', 'teal', ''];
+
+    // FadeUp observer
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
     function mk(tag, cls, text) {
       const e = document.createElement(tag);
       if (cls) e.className = cls;
       if (text !== undefined) e.textContent = text;
       return e;
     }
+
+    function fmtNum(n) { return n.toLocaleString(); }
+
     async function load() {
       const [stats, heatmap, projects] = await Promise.all([
         fetch(API+'/api/stats').then(r=>r.json()),
         fetch(API+'/api/heatmap').then(r=>r.json()),
         fetch(API+'/api/projects').then(r=>r.json()),
       ]);
-      document.getElementById('stat-total').textContent = stats.total30.toLocaleString();
+
+      // Date line
+      const now = new Date();
+      document.getElementById('date-line').textContent =
+        now.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }).toLowerCase();
+
+      // Stats
+      document.getElementById('stat-total').textContent = fmtNum(stats.total30);
       document.getElementById('stat-projects').textContent = stats.activeProjects;
       document.getElementById('stat-best').textContent = stats.bestDay;
       document.getElementById('stat-streak').textContent = stats.streak;
-      document.getElementById('streak-badge').textContent = stats.streak+'-day streak';
-      const sb = document.getElementById('sidebar-projects');
-      projects.slice(0,8).forEach((p,i)=>{
-        const item = mk('div','proj-item');
-        item.appendChild(mk('div','proj-dot '+DOT_CLASSES[i%6]));
-        item.appendChild(document.createTextNode(' '+p.name));
-        sb.appendChild(item);
-      });
-      const labels=[],data=[],now=new Date();
-      for(let i=29;i>=0;i--){
-        const d=new Date(now); d.setDate(d.getDate()-i);
-        const key=d.toISOString().slice(0,10);
-        labels.push(d.toLocaleDateString('en-US',{month:'short',day:'numeric'}));
-        data.push(stats.daily[key]||0);
+      document.getElementById('streak-badge').textContent = stats.streak + '-day streak';
+
+      // Chart
+      const labels = [], data = [];
+      for (let i = 29; i >= 0; i--) {
+        const d = new Date(now); d.setDate(d.getDate() - i);
+        const key = d.toISOString().slice(0, 10);
+        labels.push(d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }));
+        data.push(stats.daily[key] || 0);
       }
-      new Chart(document.getElementById('commitChart'),{
-        type:'bar',
-        data:{labels,datasets:[{data,backgroundColor:'rgba(0,113,227,0.5)',borderColor:'#0071e3',borderWidth:1,borderRadius:4,hoverBackgroundColor:'#0071e3'}]},
-        options:{responsive:true,plugins:{legend:{display:false},tooltip:{backgroundColor:'rgba(0,0,0,0.85)',callbacks:{label:ctx=>` ${ctx.raw} commits`}}},scales:{x:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{color:'rgba(255,255,255,0.3)',font:{size:10},maxTicksLimit:10}},y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{color:'rgba(255,255,255,0.3)',font:{size:10}}}}}
+      new Chart(document.getElementById('commitChart'), {
+        type: 'bar',
+        data: {
+          labels,
+          datasets: [{
+            data,
+            backgroundColor: 'rgba(232,232,232,0.12)',
+            borderColor: 'rgba(232,232,232,0.35)',
+            borderWidth: 1,
+            borderRadius: 3,
+            hoverBackgroundColor: 'rgba(232,232,232,0.25)'
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              backgroundColor: '#222',
+              borderColor: 'rgba(232,232,232,0.1)',
+              borderWidth: 1,
+              titleColor: 'rgba(232,232,232,0.4)',
+              bodyColor: '#e8e8e8',
+              callbacks: { label: ctx => ' ' + ctx.raw + ' commits' }
+            }
+          },
+          scales: {
+            x: { grid: { color: 'rgba(232,232,232,0.04)' }, ticks: { color: 'rgba(232,232,232,0.25)', font: { size: 10, family: 'Geist' }, maxTicksLimit: 8 } },
+            y: { grid: { color: 'rgba(232,232,232,0.04)' }, ticks: { color: 'rgba(232,232,232,0.25)', font: { size: 10, family: 'Geist' } } }
+          }
+        }
       });
-      const hm=document.getElementById('heatmap');
-      hm.textContent='';
-      const max=Math.max(...Object.values(heatmap),1);
-      for(let i=364;i>=0;i--){
-        const d=new Date(now); d.setDate(d.getDate()-i);
-        const key=d.toISOString().slice(0,10);
-        const count=heatmap[key]||0,ratio=count/max;
-        const level=count===0?'':ratio<0.25?'l1':ratio<0.5?'l2':ratio<0.75?'l3':'l4';
-        const cell=mk('div','heatmap-cell '+level);
-        cell.title=key+': '+count+' commits';
+
+      // Heatmap
+      const hm = document.getElementById('heatmap');
+      const max = Math.max(...Object.values(heatmap), 1);
+      for (let i = 364; i >= 0; i--) {
+        const d = new Date(now); d.setDate(d.getDate() - i);
+        const key = d.toISOString().slice(0, 10);
+        const count = heatmap[key] || 0;
+        const ratio = count / max;
+        const level = count === 0 ? '' : ratio < 0.25 ? 'l1' : ratio < 0.5 ? 'l2' : ratio < 0.75 ? 'l3' : 'l4';
+        const cell = mk('div', 'heatmap-cell' + (level ? ' ' + level : ''));
+        cell.title = key + ': ' + count + ' commits';
         hm.appendChild(cell);
       }
-      const tbody=document.getElementById('proj-tbody');
-      tbody.textContent='';
-      projects.forEach(p=>{
-        const tr=mk('tr');
-        const pillCls=p.status==='active'?'pill-green':p.status==='stable'?'pill-blue':'pill-amber';
-        [mk('td','proj-name',p.name),mk('td','',p.platform),mk('td','',p.lastCommitAgo),mk('td','',String(p.commits30))].forEach(td=>tr.appendChild(td));
-        const st=mk('td'); st.appendChild(mk('span','pill '+pillCls,p.status.charAt(0).toUpperCase()+p.status.slice(1)));
-        tr.appendChild(st); tbody.appendChild(tr);
+
+      // Projects
+      const list = document.getElementById('proj-list');
+      projects.forEach(p => {
+        const li = mk('li', 'proj-row');
+        const name = mk('span', 'proj-name', p.name);
+        const meta = mk('div', 'proj-meta');
+        const dot = mk('span', 'status-dot' + (p.status === 'active' ? ' active' : ''));
+        const commits = mk('span', 'proj-commits', String(p.commits30));
+        const ago = mk('span', 'proj-ago', p.lastCommitAgo);
+        meta.appendChild(dot);
+        meta.appendChild(commits);
+        meta.appendChild(ago);
+        li.appendChild(name);
+        li.appendChild(meta);
+        list.appendChild(li);
       });
     }
+
     load();
   </script>
 </body>
