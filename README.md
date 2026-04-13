@@ -1,13 +1,23 @@
-# cadence
+<img src="icon.svg" width="80">
 
-> Add a one-line description here.
+# Cadence
+![version](https://img.shields.io/badge/version-v1.0.0-blue)
 
-## Setup
+Code progress tracker. Visualizes git commit history across all repos in ~/Documents/Code.
 
+## Platforms
+- **web** — Dashboard (Chart.js, Apple Liquid Glass)
+- **iOS** — SwiftUI (coming)
+- **macOS** — SwiftUI (coming)
+
+## Dev
 ```bash
-# Add setup instructions
+# API
+cd api && npm install && node server.js
+
+# Web
+open web/index.html
 ```
 
-## License
-
-MIT © 2026 Joshua Trommel
+## Stack
+Node.js + Express API, vanilla JS web, SwiftUI (iOS/macOS). MIT 2026 Joshua Trommel.
