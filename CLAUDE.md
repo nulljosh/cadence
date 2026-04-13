@@ -19,6 +19,11 @@ open web/index.html        # open web
 - GET /api/heatmap — 365-day commit counts by date
 - GET /api/projects — all repos sorted by commits30
 
+## Links
+- GitHub: https://github.com/nulljosh/cadence
+- Live: cadence.heyitsmejosh.com
+- License: MIT 2026 Joshua Trommel
+
 ## Next
 - Wire real git log to iOS/macOS SwiftUI targets
 - Vercel deploy (serverless functions for API)
