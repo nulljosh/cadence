@@ -1,3 +1,5 @@
+import { ghGraphQL, CACHE } from './_lib.js';
+
 const QUERY = `
 query($from: DateTime!, $to: DateTime!) {
   user(login: "nulljosh") {
@@ -10,20 +12,6 @@ query($from: DateTime!, $to: DateTime!) {
     }
   }
 }`;
-
-async function ghGraphQL(query, variables) {
-  const res = await fetch('https://api.github.com/graphql', {
-    method: 'POST',
-    headers: {
-      Authorization: `bearer ${process.env.GITHUB_TOKEN}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ query, variables }),
-  });
-  const json = await res.json();
-  if (json.errors) throw new Error(json.errors[0].message);
-  return json.data;
-}
 
 export default async function handler(req, res) {
   const to = new Date();
@@ -43,6 +31,6 @@ export default async function handler(req, res) {
     if (d.contributionCount > 0) counts[d.date] = d.contributionCount;
   }
 
-  res.setHeader('Cache-Control', 's-maxage=300, stale-while-revalidate=600');
+  res.setHeader('Cache-Control', CACHE);
   res.json(counts);
 }

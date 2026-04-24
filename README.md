@@ -1,23 +1,19 @@
 <img src="icon.svg" width="80">
 
 # Cadence
-![version](https://img.shields.io/badge/version-v1.0.0-blue)
+![version](https://img.shields.io/badge/version-v1.0.1-blue)
 
-Code progress tracker. Visualizes git commit history across all repos in ~/Documents/Code.
+Code progress tracker. Visualizes GitHub commit history via the GraphQL API.
 
 ## Platforms
-- **web** — Dashboard (Chart.js, Apple Liquid Glass)
+- **web** — Dashboard at [cadence.heyitsmejosh.com](https://cadence.heyitsmejosh.com) (Chart.js)
 - **iOS** — SwiftUI (coming)
 - **macOS** — SwiftUI (coming)
 
-## Dev
-```bash
-# API
-cd api && npm install && node server.js
-
-# Web
-open web/index.html
-```
-
 ## Stack
-Node.js + Express API, vanilla JS web, SwiftUI (iOS/macOS). MIT 2026 Joshua Trommel.
+Vercel serverless functions (`api/`) + vanilla JS web. MIT 2026 Joshua Trommel.
+
+## API
+- `GET /api/stats` — total30, streak, bestDay, daily map, perRepo
+- `GET /api/heatmap` — 365-day {date: count} map
+- `GET /api/projects` — repos sorted by commits in last 30 days
