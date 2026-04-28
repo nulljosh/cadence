@@ -10,7 +10,7 @@ class NetworkManager: ObservableObject {
     @Published var isLoading = false
     @Published var error: String?
 
-    private let base = "http://localhost:3001"
+    private let base = "https://cadence.heyitsmejosh.com"
 
     func load() async {
         isLoading = true
