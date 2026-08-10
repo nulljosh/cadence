@@ -10,6 +10,9 @@ export async function ghGraphQL(query, variables) {
     headers: {
       Authorization: `bearer ${process.env.GITHUB_TOKEN}`,
       'Content-Type': 'application/json',
+      // GitHub rejects requests without a User-Agent. Node's fetch sets one
+      // implicitly; the Workers runtime does not.
+      'User-Agent': 'cadence',
     },
     body: JSON.stringify({ query, variables }),
   });
