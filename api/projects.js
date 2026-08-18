@@ -1,7 +1,7 @@
 import { ghGraphQL, CACHE, repoStatus } from './_lib.js';
 
 const QUERY = `
-query($from: DateTime!, $to: DateTime!) {
+query($from: DateTime!, $to: DateTime!, $since: GitTimestamp!) {
   user(login: "nulljosh") {
     contributionsCollection(from: $from, to: $to) {
       commitContributionsByRepository(maxRepositories: 100) {
@@ -14,7 +14,7 @@ query($from: DateTime!, $to: DateTime!) {
     pushedAt
     defaultBranchRef {
       target {
-        ... on Commit { history(since: $from) { totalCount } }
+        ... on Commit { history(since: $since) { totalCount } }
       }
     }
   }
@@ -41,6 +41,9 @@ export default async function handler(req, res) {
   const data = await ghGraphQL(QUERY, {
     from: from.toISOString(),
     to: to.toISOString(),
+    // history(since:) is a GitTimestamp, not a DateTime — same value, separate
+    // variable, or GitHub rejects the whole query and `data` comes back empty.
+    since: from.toISOString(),
   });
 
   const repos = data.user.contributionsCollection.commitContributionsByRepository
