@@ -17,3 +17,7 @@ Vercel serverless functions (`api/`) + vanilla JS web. MIT 2026 Joshua Trommel.
 - `GET /api/stats` — total30, streak, bestDay, daily map, perRepo
 - `GET /api/heatmap` — 365-day {date: count} map
 - `GET /api/projects` — repos sorted by commits in last 30 days
+
+## Whitepaper
+
+[Technical whitepaper](WHITEPAPER.md)
