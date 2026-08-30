@@ -23,3 +23,14 @@ open web/index.html   # static, fetches from live API
 - `api/` uses ES modules (`"type": "module"` in `api/package.json`)
 - Files prefixed `_` in `api/` are shared modules, not Vercel endpoints
 - Stats endpoint queries 365d for accurate streak; filters last 30d for total30
+
+## App icon
+
+`Sources/Assets.xcassets/AppIcon.appiconset`, generated from `icon.svg` 2026-08-30 — cadence had
+no asset catalog at all before that, so both targets built with no icon. Both targets set
+`ASSETCATALOG_COMPILER_APPICON_NAME`; on macOS that setting is what wires the catalog up at all.
+The universal 1024 is flattened (iOS rejects alpha); the ten `mac_*.png` idiom sizes exist because
+macOS gets no icon from a universal entry.
+
+Regenerate with `rsvg-convert -w 1024 -h 1024` — the explicit size is required, or rsvg uses the
+SVG's intrinsic size and the art lands small on a 1024 canvas.

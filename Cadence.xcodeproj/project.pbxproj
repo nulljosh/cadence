@@ -11,11 +11,13 @@
 		339866CA34B958086112506E /* ProjectListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 130077672D5A6109ADB84ED4 /* ProjectListView.swift */; };
 		37BA1C4CE72D720A03828C26 /* CadenceApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538970C5E1D8428510459B99 /* CadenceApp.swift */; };
 		40E677C0C051AAA81CBCC18E /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E35DCA8ACE0950469BEC730E /* Charts.framework */; };
+		73AB18E035021B36C6C8D6EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E67908E6E9D58D7B1CA05E2 /* Assets.xcassets */; };
 		7E626FD323ABC12DA7989664 /* HeatmapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1405F38E45CE2E7E103F52 /* HeatmapView.swift */; };
 		82D682C24124059547AB545D /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86249A8A2A953D8CD0202DC /* DashboardView.swift */; };
 		835D72C5EFB3FDC6B161933D /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9624CE4BFBEA9E74122EC3FE /* NetworkManager.swift */; };
 		AD81A218DCA230CCD6F48F41 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C18E94F591A16E947BB25F /* Models.swift */; };
 		B02D5669E35C633080F76B0A /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C18E94F591A16E947BB25F /* Models.swift */; };
+		B0EB4F70F8360F5BD5A729D6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E67908E6E9D58D7B1CA05E2 /* Assets.xcassets */; };
 		B991C542D82644EE143D424E /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86249A8A2A953D8CD0202DC /* DashboardView.swift */; };
 		BF7940164593F7B1B0E0D1DF /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E35DCA8ACE0950469BEC730E /* Charts.framework */; };
 		C4A86D046FD2CDF6F99B539A /* CadenceApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78167B673FBC27479A3167B /* CadenceApp.swift */; };
@@ -28,6 +30,7 @@
 		130077672D5A6109ADB84ED4 /* ProjectListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListView.swift; sourceTree = "<group>"; };
 		3351AAAD9A035C133A4FB1DD /* Cadence-iOS.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = "Cadence-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		538970C5E1D8428510459B99 /* CadenceApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CadenceApp.swift; sourceTree = "<group>"; };
+		5E67908E6E9D58D7B1CA05E2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8B1405F38E45CE2E7E103F52 /* HeatmapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeatmapView.swift; sourceTree = "<group>"; };
 		9624CE4BFBEA9E74122EC3FE /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		A86249A8A2A953D8CD0202DC /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
@@ -61,6 +64,7 @@
 		101C4A96CD1B541BD4BF25D3 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				5E67908E6E9D58D7B1CA05E2 /* Assets.xcassets */,
 				A86249A8A2A953D8CD0202DC /* DashboardView.swift */,
 				8B1405F38E45CE2E7E103F52 /* HeatmapView.swift */,
 				03C18E94F591A16E947BB25F /* Models.swift */,
@@ -124,6 +128,7 @@
 			buildConfigurationList = 62FA5FD017DFD034F1E2D357 /* Build configuration list for PBXNativeTarget "Cadence-macOS" */;
 			buildPhases = (
 				EB65C7D7124B00F01FB2D851 /* Sources */,
+				BA17D9D7BFB6FBDB642047BC /* Resources */,
 				7168FFF6E7D62F59D4BD7D8F /* Frameworks */,
 			);
 			buildRules = (
@@ -142,6 +147,7 @@
 			buildConfigurationList = 4595EDA79A7CFD04CF3AA7EB /* Build configuration list for PBXNativeTarget "Cadence-iOS" */;
 			buildPhases = (
 				38F1FD2F49A6C6E09E0375DC /* Sources */,
+				07E7D5D06BC5AE1DBEE00B86 /* Resources */,
 				CAA6B8393BBDDCD094559DB2 /* Frameworks */,
 			);
 			buildRules = (
@@ -185,6 +191,25 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		07E7D5D06BC5AE1DBEE00B86 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B0EB4F70F8360F5BD5A729D6 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BA17D9D7BFB6FBDB642047BC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				73AB18E035021B36C6C8D6EA /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		38F1FD2F49A6C6E09E0375DC /* Sources */ = {
