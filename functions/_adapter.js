@@ -21,8 +21,11 @@ export function adapt(handler) {
     try {
       await handler(request, res);
     } catch (err) {
-      return new Response(JSON.stringify({ error: err.message }), {
-        status: 500,
+      // Upstream detail stays in the log; the caller gets a fixed string. err.message
+      // here is GitHub's, and it has carried token/scope hints before.
+      console.error('[cadence]', err);
+      return new Response(JSON.stringify({ error: 'Upstream request failed' }), {
+        status: 502,
         headers,
       });
     }

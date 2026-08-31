@@ -15,7 +15,12 @@ export async function ghGraphQL(query, variables) {
       'User-Agent': 'cadence',
     },
     body: JSON.stringify({ query, variables }),
+    // A GitHub outage returns an HTML error page, and res.json() on it threw a parse
+    // error that read like a bug in this code. Check the status here, once, so all
+    // three endpoints get it.
+    signal: AbortSignal.timeout(10000),
   });
+  if (!res.ok) throw new Error(`GitHub GraphQL ${res.status}`);
   const json = await res.json();
   if (json.errors) throw new Error(json.errors[0].message);
   return json.data;
