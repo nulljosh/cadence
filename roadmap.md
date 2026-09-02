@@ -1,6 +1,6 @@
 # Cadence roadmap
 
-## Cloudflare migration — DONE 2026-08-17
+## Cloudflare migration, DONE 2026-08-17
 
 Live at https://cadence.heyitsmejosh.com off Pages project `cadence` (`cadence-cm8.pages.dev`).
 `/api/stats`, `/api/heatmap`, `/api/projects` all 200. Vercel project deleted.
@@ -19,5 +19,5 @@ Two bugs were in the way, neither the one this file predicted:
 ## Also recovered
 
 `Sources/` holds a SwiftUI iOS + macOS app (`Cadence.xcodeproj`, `project.yml`) that
-existed nowhere locally. Never built or verified this session — build it before
+existed nowhere locally. Never built or verified this session, build it before
 assuming it compiles.

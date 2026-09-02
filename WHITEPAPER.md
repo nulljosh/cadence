@@ -2,8 +2,8 @@
 
 **v1.0.2** | August 2026
 
-Cadence turns GitHub commit history into a progress signal: how much you shipped,
-how consistently, and where the work went. Live at
+How much did you ship? Cadence reads your GitHub commits and tells you. How much,
+how steadily, and where the time went. Live at
 [cadence.heyitsmejosh.com](https://cadence.heyitsmejosh.com), with SwiftUI apps for
 iOS and macOS on the same API.
 
@@ -23,11 +23,11 @@ every metric without paginating the REST commits endpoint per repo.
 
 Derived metrics:
 
-- **total30** — commits in the trailing 30 days.
-- **streak** — consecutive days with at least one commit, walking backward from today.
-- **bestDay** — max daily count in the window, with its date.
-- **daily** — `{date: count}` map, the heatmap source.
-- **perRepo** — repositories ranked by commits in the trailing 30 days.
+- **total30**: commits in the trailing 30 days.
+- **streak**: consecutive days with at least one commit, walking backward from today.
+- **bestDay**: max daily count in the window, with its date.
+- **daily**: `{date: count}` map, the heatmap source.
+- **perRepo**: repositories ranked by commits in the trailing 30 days.
 
 ## API
 
