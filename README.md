@@ -3,20 +3,20 @@
 # Cadence
 ![version](https://img.shields.io/badge/version-v1.0.2-blue)
 
-Code progress tracker. Visualizes GitHub commit history via the GraphQL API.
+How much did you ship? Cadence pulls your GitHub commit history through the GraphQL API and draws it: streaks, best days, what's hot this month.
 
 ## Platforms
-- **web** — Dashboard at [cadence.heyitsmejosh.com](https://cadence.heyitsmejosh.com) (Chart.js)
-- **iOS** — SwiftUI, wired to live API
-- **macOS** — SwiftUI, wired to live API
+- **web**: the dashboard at [cadence.heyitsmejosh.com](https://cadence.heyitsmejosh.com), Chart.js
+- **iOS**: SwiftUI, on the live API
+- **macOS**: SwiftUI, on the live API
 
 ## Stack
-Vercel serverless functions (`api/`) + vanilla JS web. MIT 2026 Joshua Trommel.
+Serverless functions in `api/` and plain JS on the front. MIT 2026 Joshua Trommel.
 
 ## API
-- `GET /api/stats` — total30, streak, bestDay, daily map, perRepo
-- `GET /api/heatmap` — 365-day {date: count} map
-- `GET /api/projects` — repos sorted by commits in last 30 days
+- `GET /api/stats`: total30, streak, bestDay, daily map, perRepo
+- `GET /api/heatmap`: 365 days of {date: count}
+- `GET /api/projects`: repos by commits in the last 30 days
 
 ## Whitepaper
 
@@ -24,10 +24,9 @@ Vercel serverless functions (`api/`) + vanilla JS web. MIT 2026 Joshua Trommel.
 
 ## API and agent tools
 
-[`docs/API.md`](docs/API.md) documents the HTTP surface (where there is one) and
-the WebMCP tools this app registers on `document.modelContext`, so an in-browser
-agent can drive it. Tools are split into read-only, reversible writes, and the
-few that require human confirmation.
+An agent can drive this app. [`docs/API.md`](docs/API.md) lists the HTTP surface, where there
+is one, and the WebMCP tools registered on `document.modelContext`. Tools come in three kinds:
+read-only, writes you can undo, and the few that ask a human first.
 
 ## Architecture
 
