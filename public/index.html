@@ -12,6 +12,7 @@
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
+      color-scheme: light dark;
       --bg: #111;
       --text: #e8e8e8;
       --text-secondary: rgba(232,232,232,0.5);
@@ -20,6 +21,9 @@
       --accent: #e8e8e8;
       --font: 'Geist', -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
       --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    @media (prefers-color-scheme: light) {
+      :root { --bg: #fff; --text: #111; --text-secondary: rgba(17,17,17,0.55); --text-tertiary: rgba(17,17,17,0.3); --border: rgba(17,17,17,0.1); --accent: #111; }
     }
 
     html { scroll-behavior: smooth; }
