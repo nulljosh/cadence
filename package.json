@@ -1,8 +1,14 @@
 {
   "name": "cadence",
+  "license": "MIT",
   "version": "1.0.2",
   "description": "Pulls your GitHub commit history through the GraphQL API and visualizes streaks, best days, and monthly trends.",
-  "keywords": ["github", "graphql", "commit-history", "visualization"],
+  "keywords": [
+    "github",
+    "graphql",
+    "commit-history",
+    "visualization"
+  ],
   "type": "module",
   "scripts": {
     "test": "node --test test.mjs"
