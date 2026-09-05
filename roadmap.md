@@ -21,3 +21,6 @@ Two bugs were in the way, neither the one this file predicted:
 `Sources/` holds a SwiftUI iOS + macOS app (`Cadence.xcodeproj`, `project.yml`) that
 existed nowhere locally. Never built or verified this session, build it before
 assuming it compiles.
+
+## TUI pilot (2026-09-05)
+- `cadence-tui` SwiftPM target (SwiftTUI). `swift build && ./.build/debug/cadence-tui` prints a stats card from the live API. Needs a real TTY.
