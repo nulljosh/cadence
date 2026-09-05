@@ -9,6 +9,7 @@ How much did you ship? Cadence pulls your GitHub commit history through the Grap
 - **web**: the dashboard at [cadence.heyitsmejosh.com](https://cadence.heyitsmejosh.com), Chart.js
 - **iOS**: SwiftUI, on the live API
 - **macOS**: SwiftUI, on the live API
+- **Terminal**: `swift build && ./.build/debug/cadence-tui` — see [tui/](tui/)
 
 ## Stack
 Serverless functions in `api/` and plain JS on the front. MIT 2026 Joshua Trommel.
