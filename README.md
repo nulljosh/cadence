@@ -5,6 +5,12 @@
 
 How much did you ship? Cadence pulls your GitHub commit history through the GraphQL API and draws it: streaks, best days, what's hot this month.
 
+## Screenshots
+
+<p>
+<img src="screenshots/cadence-1.jpg" alt="Cadence">
+</p>
+
 ## Platforms
 - **web**: the dashboard at [cadence.heyitsmejosh.com](https://cadence.heyitsmejosh.com), Chart.js
 - **iOS**: SwiftUI, on the live API
