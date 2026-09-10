@@ -49,6 +49,9 @@ export default async function handler(req, res) {
 
   const bestDay = Object.values(daily).reduce((a, b) => Math.max(a, b), 0);
 
+  // Counts back from today and stops at the first gap, so a day with zero
+  // commits so far (today, before any push) reads as streak 0 rather than
+  // carrying yesterday's streak forward until midnight.
   let streak = 0;
   const toStr = to.toISOString().slice(0, 10);
   for (let i = 0; i < 365; i++) {
