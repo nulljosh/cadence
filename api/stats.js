@@ -1,4 +1,4 @@
-import { ghGraphQL, CACHE } from './_lib.js';
+import { ghGraphQL, CACHE, EXCLUDED } from './_lib.js';
 
 const QUERY = `
 query($from: DateTime!, $to: DateTime!) {
@@ -15,7 +15,6 @@ query($from: DateTime!, $to: DateTime!) {
   }
 }`;
 
-const EXCLUDED = new Set(['journal']);
 
 export default async function handler(req, res) {
   const to = new Date();

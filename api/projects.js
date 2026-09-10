@@ -1,4 +1,4 @@
-import { ghGraphQL, CACHE, repoStatus } from './_lib.js';
+import { ghGraphQL, CACHE, repoStatus, EXCLUDED } from './_lib.js';
 
 const QUERY = `
 query($from: DateTime!, $to: DateTime!, $since: GitTimestamp!) {
@@ -20,7 +20,6 @@ query($from: DateTime!, $to: DateTime!, $since: GitTimestamp!) {
   }
 }`;
 
-const EXCLUDED = new Set(['journal']);
 
 function timeAgo(dateStr) {
   const diff = Date.now() - new Date(dateStr).getTime();

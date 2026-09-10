@@ -326,7 +326,7 @@
 #install-anywhere h2{font-size:clamp(1.6rem,3.4vw,2.4rem);margin:0 0 .6rem;letter-spacing:-.02em;}
 #install-anywhere .xp-lead{max-width:46ch;margin:0 0 2.5rem;opacity:.7;line-height:1.55;}
 #install-anywhere .xp-grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));}
-#install-anywhere .xp-card{background:color-mix(in srgb, currentColor 4%, transparent);border:1px solid color-mix(in srgb, currentColor 14%, transparent);border-radius:12px;padding:1.25rem;display:flex;flex-direction:column;gap:.5rem;}
+#install-anywhere .xp-card{background:color-mix(in srgb, currentColor 4%, transparent);border:1px solid color-mix(in srgb, currentColor 14%, transparent);border-radius:var(--radius);padding:1.25rem;display:flex;flex-direction:column;gap:.5rem;}
 #install-anywhere .xp-card h3{margin:0;font-size:1rem;letter-spacing:-.01em;}
 #install-anywhere .xp-card p{margin:0;font-size:.9rem;line-height:1.5;opacity:.7;flex:1;}
 #install-anywhere .xp-card a{margin-top:.5rem;font-size:.875rem;font-weight:500;color:var(--accent,currentColor);text-decoration:none;}
@@ -437,9 +437,10 @@
         data.push(stats.daily[key] || 0);
       }
       const dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const accentRgb = dark ? '91,141,238' : '37,88,217';
+      const accentRgb = '255,202,48'; // --bulb
       const gridColor = dark ? 'rgba(255,255,255,0.04)' : 'rgba(0,0,0,0.04)';
       const tickColor = dark ? 'rgba(237,235,232,0.3)' : '#b0b0a8';
+      const uiFont = getComputedStyle(document.body).fontFamily;
       new Chart(document.getElementById('commitChart'), {
         type: 'bar',
         data: {
@@ -467,8 +468,8 @@
             }
           },
           scales: {
-            x: { grid: { color: gridColor }, ticks: { color: tickColor, font: { size: 10, family: 'Geist' }, maxTicksLimit: 8 } },
-            y: { grid: { color: gridColor }, ticks: { color: tickColor, font: { size: 10, family: 'Geist' } } }
+            x: { grid: { color: gridColor }, ticks: { color: tickColor, font: { size: 10, family: uiFont }, maxTicksLimit: 8 } },
+            y: { grid: { color: gridColor }, ticks: { color: tickColor, font: { size: 10, family: uiFont } } }
           }
         }
       });
@@ -513,8 +514,8 @@
 <!-- share -->
 <style>
 #share-btn{position:fixed;right:16px;bottom:16px;z-index:9999;border:1px solid rgba(128,128,128,.35);
-background:Canvas;color:CanvasText;font:inherit;font-size:14px;padding:8px 14px;border-radius:999px;
-cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.12)}
+background:Canvas;color:CanvasText;font:inherit;font-size:14px;padding:8px 14px;border-radius:var(--radius);
+cursor:pointer}
 #share-btn:hover{border-color:rgba(128,128,128,.6)}
 @media print{#share-btn{display:none}}
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }

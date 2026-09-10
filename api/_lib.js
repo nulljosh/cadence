@@ -1,4 +1,5 @@
 export const CACHE = 's-maxage=300, stale-while-revalidate=600';
+export const EXCLUDED = new Set(['journal']);
 
 export function repoStatus(commits) {
   return commits > 20 ? 'active' : commits > 5 ? 'stable' : 'slow';

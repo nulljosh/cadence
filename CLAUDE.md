@@ -3,7 +3,7 @@
 Code progress tracker, visualizes GitHub commits via GraphQL API.
 
 ## Structure
-- `api/_lib.js`: shared `ghGraphQL` helper + `CACHE` header constant
+- `api/_lib.js`: shared `ghGraphQL` helper, `CACHE` header constant, `EXCLUDED` repo set, `repoStatus`
 - `api/stats.js`: total30, streak, bestDay, daily map, perRepo (365-day window)
 - `api/heatmap.js`: 365-day {date: count} map
 - `api/projects.js`: repos sorted by commits30; journal uses `defaultBranchRef.target.history.totalCount` (not contribution graph, which inflates from history rewrites)
