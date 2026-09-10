@@ -36,6 +36,7 @@
       transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
     }
     .fade-up.visible { opacity: 1; transform: translateY(0); }
+    @media (prefers-reduced-motion: no-preference) { .wordmark { will-change: transform; } }
 
     /* Header */
     header { margin-bottom: clamp(3rem, 6vw, 5rem); }
@@ -387,6 +388,15 @@
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
     }, { threshold: 0.1 });
     document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+    // Subtle parallax on the wordmark, off under reduced motion
+    (function () {
+      const wordmark = document.querySelector('.wordmark');
+      if (!wordmark || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      let ticking = false;
+      function apply() { wordmark.style.transform = 'translateY(' + (window.scrollY * 0.05) + 'px)'; ticking = false; }
+      window.addEventListener('scroll', () => { if (!ticking) { requestAnimationFrame(apply); ticking = true; } }, { passive: true });
+    })();
 
     function mk(tag, cls, text) {
       const e = document.createElement(tag);
