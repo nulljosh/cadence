@@ -2,6 +2,7 @@
 
 # Cadence
 ![version](https://img.shields.io/badge/version-v1.0.2-blue)
+![license](https://img.shields.io/badge/license-MIT-green) [![GitHub](https://img.shields.io/badge/GitHub-nulljosh%2Fcadence-black?logo=github)](https://github.com/nulljosh/cadence)
 
 How much did you ship? Cadence pulls your GitHub commit history through the GraphQL API and draws it: streaks, best days, what's hot this month.
 
