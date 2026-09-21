@@ -1,18 +1,20 @@
 # Architecture
 
-Cadence tracks personal code productivity. Pull GitHub commit history via GraphQL API and visualize it: streaks (longest run of consecutive days with commits), best days, what's hot this month, and a heatmap of all 365 days. Runs on web (static frontend, API-driven), iOS (SwiftUI, native), macOS (SwiftUI, native), and TUI (Swift CLI).
+Cadence shows you how much you have actually been coding. It reads your public GitHub history and turns it into the numbers you care about: your current streak of days in a row with work committed, your best single day, which projects you have been living in this month, and a year-long calendar where each day is shaded by how busy it was.
+
+It runs in a browser, on iPhone and Mac, and in the terminal.
 
 ## How it runs
 
-**Web:** User navigates to cadence.heyitsmejosh.com. Static HTML loads, fetches from the live API, and renders charts via Chart.js. Three endpoints provide the data: `/api/stats` (streaks, totals, best day, per-repo breakdown), `/api/heatmap` (365-day map), `/api/projects` (which repos are most active). GitHub authentication uses a personal access token (read-only, public repos only).
+**Web:** You open cadence.heyitsmejosh.com. The page loads, asks the server for your numbers, and draws the charts. There are three requests it can make: one for the headline stats (streak, totals, best day, and a breakdown by project), one for the year calendar, and one for which projects are most active. It signs in to GitHub with a token that can only read, and only sees public repositories.
 
-**iOS/macOS:** App launches, requests the same three endpoints via URLSession, and renders results in SwiftUI. macOS gets a larger dashboard layout. Both platforms support light and dark themes.
+**iOS/macOS:** The app asks for the same three sets of numbers and draws them natively. The Mac version spreads out into a wider dashboard. Both follow light and dark mode.
 
-**TUI:** SwiftPM executable. `cadence-tui` prints stats to the terminal.
+**Terminal:** Run `cadence-tui` and it prints the same stats as text.
 
 ## API
 
-The API is built on Cloudflare Workers and Vercel serverless functions (interchangeable). All three endpoints query GitHub's GraphQL API (the /contributions endpoint does not give commit counts, so these use /repositoryOwner and /search instead). Cache-control: 5 minutes (s-maxage=300) with 10-minute stale-while-revalidate.
+The server side is a handful of small functions that can run on either Cloudflare or Vercel; the code is the same either way. All three of them ask GitHub for the data. GitHub's own contributions feed gives days but not commit counts, so Cadence asks by repository and by search instead, which does return counts. Answers are held for five minutes before being fetched fresh, and for ten minutes after that a stale answer is served instantly while a new one is fetched in the background.
 
 | File | What it owns |
 |---|---|
