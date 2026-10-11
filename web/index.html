@@ -451,9 +451,9 @@
         data.push(stats.daily[key] || 0);
       }
       const dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const accentRgb = '255,202,48'; // --bulb
+      const accentRgb = dark ? '250,250,250' : '0,0,0';
       const gridColor = dark ? 'rgba(255,255,255,0.04)' : 'rgba(0,0,0,0.04)';
-      const tickColor = dark ? 'rgba(237,235,232,0.3)' : '#b0b0a8';
+      const tickColor = dark ? 'rgba(237,235,232,0.3)' : 'rgba(0,0,0,0.4)';
       const uiFont = getComputedStyle(document.body).fontFamily;
       new Chart(document.getElementById('commitChart'), {
         type: 'bar',
