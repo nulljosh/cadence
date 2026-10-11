@@ -17,7 +17,7 @@ test("GraphQL-level errors still surface", async () => {
 
 test("the adapter does not leak the upstream message to the caller", async () => {
   const handler = adapt(async () => { throw new Error("Bad credentials for token ghp_secret"); });
-  const res = await handler({ request: new Request("https://cadence.heyitsmejosh.com/api/stats"), env: {} });
+  const res = await handler({ request: new Request("https://cadence.jaybulb.com/api/stats"), env: {} });
   assert.equal(res.status, 502);
   const body = await res.text();
   assert.ok(!body.includes("ghp_secret"), body);
