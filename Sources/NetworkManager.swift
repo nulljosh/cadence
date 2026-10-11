@@ -11,7 +11,7 @@ class NetworkManager: ObservableObject {
     @Published var error: String?
     @Published var lastUpdated: Date?
 
-    private let base = "https://cadence.heyitsmejosh.com"
+    private let base = "https://cadence.jaybulb.com"
     private let defaults = UserDefaults.standard
 
     private init() { loadCache() }

@@ -27,7 +27,7 @@ data class Stats(
 // Reads the same public endpoints the web dashboard does. No GITHUB_TOKEN
 // here on purpose -- that stays server-side in the Worker; a native client
 // embedding it would leak it.
-class CadenceClient(private val baseUrl: String = "https://cadence.heyitsmejosh.com") {
+class CadenceClient(private val baseUrl: String = "https://cadence.jaybulb.com") {
     private val http = HttpClient {
         install(ContentNegotiation) { json(Json { ignoreUnknownKeys = true }) }
     }

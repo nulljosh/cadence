@@ -5,7 +5,7 @@ import SwiftTUI
 // exits, same as nimble-tui. Fetches directly rather than through NetworkManager to
 // skip its UserDefaults caching, which a one-shot CLI run doesn't need.
 
-let base = "https://cadence.heyitsmejosh.com"
+let base = "https://cadence.jaybulb.com"
 
 func fetch<T: Decodable>(_ type: T.Type, path: String) async -> T? {
     guard let url = URL(string: base + path) else { return nil }
@@ -24,7 +24,7 @@ struct StatsCard: View {
                 Text("Active projects: \(stats.activeProjects)")
                 Text("Streak: \(stats.streak) · best day: \(stats.bestDay)")
             } else {
-                Text("Could not reach cadence.heyitsmejosh.com")
+                Text("Could not reach cadence.jaybulb.com")
             }
             ForEach(projects.prefix(5)) { p in
                 Text("\(p.name) — \(p.commits30) commits, \(p.lastCommitAgo)")
