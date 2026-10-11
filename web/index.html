@@ -6,10 +6,14 @@
   <title>Cadence</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
-@import url("https://heyitsmejosh.com/tokens.css");
+/* Portfolio look (tokens-lovefrom): #fafafa on #0f0f0f ink, hairlines, no radius, no shadows, system sans */
+    :root{--bg:#fafafa;--text:#000;--text-secondary:rgba(0,0,0,.7);--text-tertiary:rgba(0,0,0,.5);--border:rgba(0,0,0,.08);
+      --cell0:rgba(0,0,0,.05);--cell1:rgba(0,0,0,.2);--cell2:rgba(0,0,0,.4);--cell3:rgba(0,0,0,.65);--cell4:#000;
+      --ease:cubic-bezier(.22,1,.36,1);--spring:var(--ease);
+      --font:-apple-system,BlinkMacSystemFont,system-ui,'Helvetica Neue',Helvetica,Arial,sans-serif}
+    @media (prefers-color-scheme: dark){:root{--bg:#0f0f0f;--text:#fafafa;--text-secondary:rgba(250,250,250,.7);--text-tertiary:rgba(250,250,250,.5);--border:rgba(250,250,250,.1);
+      --cell0:rgba(250,250,250,.06);--cell1:rgba(250,250,250,.22);--cell2:rgba(250,250,250,.4);--cell3:rgba(250,250,250,.65);--cell4:#fafafa}}
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-    :root{--text-secondary:var(--text2);--text-tertiary:var(--text3);--cell0:var(--bg2);--cell1:#ffefb8;--cell2:#ffe082;--cell3:#ffd54a;--cell4:var(--bulb);--font:var(--font-body);}    }
 
     html { scroll-behavior: smooth; }
 
@@ -65,7 +69,7 @@
       letter-spacing: 0.1em;
       color: var(--text-tertiary);
       border: 1px solid var(--border);
-      border-radius: 100px;
+      border-radius: 0;
       padding: 3px 10px;
     }
 
@@ -131,7 +135,7 @@
       padding: 0.3rem 0;
       font-size: 0.8125rem;
       color: var(--text-tertiary);
-      font-family: 'Geist Mono', 'Geist', monospace;
+      font-variant-numeric: tabular-nums;
     }
 
     .repo-breakdown li span:first-child { color: var(--text-secondary); }
@@ -160,7 +164,7 @@
     .heatmap-cell {
       width: 11px;
       height: 11px;
-      border-radius: 2px;
+      border-radius: 0;
       background: var(--cell0);
       transition: transform 0.15s var(--spring), opacity 0.15s;
     }
@@ -221,7 +225,7 @@
       display: inline-block;
       width: 5px;
       height: 5px;
-      border-radius: 50%;
+      border-radius: 0;
       background: var(--text-tertiary);
       vertical-align: middle;
       margin-right: 4px;
@@ -254,7 +258,7 @@
     footer a:hover { color: var(--text); }
   </style>
   <link rel="manifest" href="/manifest.webmanifest">
-  <meta name="theme-color" content="#f5f0e4">
+  <meta name="theme-color" content="#fafafa">
   <link rel="apple-touch-icon" href="/icon-192.png">
   <meta name="apple-mobile-web-app-capable" content="yes">
     <meta property="og:type" content="website">
